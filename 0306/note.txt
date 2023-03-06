@@ -1,0 +1,4 @@
+flex 就是把l變成c檔案 
+flex 就是 lex 的compiler
+
+flex -o 
