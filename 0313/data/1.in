@@ -1,0 +1,3 @@
+int A = 10;
+int B = 5;
+if(A > B) { printf("A is Win"); }

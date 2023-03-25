@@ -1,0 +1,3 @@
+int LEX123 = 123;
+int yacc_is_not_easy = -50;
+if(yacc_is_not_easy > LEX123) { printf("Hello World!"); }
