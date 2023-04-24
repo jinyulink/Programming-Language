@@ -1,0 +1,6 @@
+int A;
+float B;
+B = 17.23;
+A = 5 + B;
+float D;
+print A;

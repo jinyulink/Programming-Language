@@ -1,0 +1,6 @@
+int A;
+int B;
+A = 5;
+B = 2.5;
+A = 8763;
+print A;

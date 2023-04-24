@@ -1,0 +1,4 @@
+int A;
+float A;
+A = 5;
+print A;
