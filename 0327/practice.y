@@ -40,7 +40,6 @@ int line = 1 ;
 %token<sval> ID 
 %type<rval> id_val
 
-// 定義優先順序3
 %left '='
 %left '+' '-'
 
@@ -112,7 +111,6 @@ def_stmt	: INT ID ';' {
 			}
 			;
 assign_stmt	: ID '=' id_val ';' {
-				// 先判斷ID有沒有被宣告
 				char typeID[6];
 				int  indexID;
 				int Find = 0;
@@ -126,7 +124,7 @@ assign_stmt	: ID '=' id_val ';' {
 						break;
 					}
                 }
-				// printf("%s.,%s.\n", $<rval.type>3, typeID);
+				
 				if(Find == 0){
                     char error[64]={};
                     strcat(error, "Variable ");
@@ -136,12 +134,10 @@ assign_stmt	: ID '=' id_val ';' {
 					return 1;
 				}			
 				
-				// 判斷等號兩邊型態的正確性
 				else if(strcmp($<rval.type>3, typeID) != 0){
 					yyerror("Type error. Error in line ");
 					return 1;
 				}
-				// 將計算結果放回去(先省略)
 
 				line++;
 			}
@@ -150,7 +146,6 @@ id_val		: id_val '+' id_val {
 				// printf("%s.,%s.\n", $<rval.type>1, $<rval.type>3);
 				if(!strcmp($<rval.type>1, "FLOAT") && !strcmp($<rval.type>3, "FLOAT")){
 					strcpy($<rval.type>$, "FLOAT");
-					$<rval.f>$ = $<rval.f>1 + $<rval.f>3;
 				}else if(!strcmp($<rval.type>1, "FLOAT") && !strcmp($<rval.type>3, "INT  ")){
 					yyerror("Type error. Error in line ");
 					return 1;
@@ -159,31 +154,26 @@ id_val		: id_val '+' id_val {
 					return 1;
 				}else{
 					strcpy($<rval.type>$, "INT  ");
-					$<rval.i>$ = $<rval.i>1 + $<rval.i>3;
 				}
 			}
 			| id_val '-' id_val {
-				if($<rval.type>1 == "FLOAT" && $<rval.type>3 == "FLOAT"){
+				if(!strcmp($<rval.type>1, "FLOAT") && !strcmp($<rval.type>3, "FLOAT")){
 					strcpy($<rval.type>$, "FLOAT");
-					$<rval.f>$ = $<rval.f>1 - $<rval.f>3;
-				}else if($<rval.type>1 == "FLOAT" && $<rval.type>3 == "INT  "){
+				}else if(!strcmp($<rval.type>1, "FLOAT") && !strcmp($<rval.type>3, "INT  ")){
 					yyerror("Type Error. Error in line ");
 					return 1;
-				}else if($<rval.type>1 == "INT  " && $<rval.type>3 == "FLOAT"){
+				}else if(!strcmp($<rval.type>1, "INT  ") && !strcmp($<rval.type>3, "FLOAT")){
 					yyerror("Type Error. Error in line ");
 					return 1;
 				}else{
 					strcpy($<rval.type>$, "INT  ");
-					$<rval.i>$ = $<rval.i>1 - $<rval.i>3;
 				}
 			}
 			| INTNUMBER {
-				strcpy($<rval.type>$, "INT  ");
-				$<rval.i>$ = $1;				
+				strcpy($<rval.type>$, "INT  ");				
 			}
 			| FLOATNUMBER {
 				strcpy($<rval.type>$, "FLOAT");
-				$<rval.f>$ = $1;
 			}
 			| ID {
 				int Find = 0;

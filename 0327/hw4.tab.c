@@ -538,8 +538,8 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    51,    51,    54,    55,    57,    58,    59,    61,    87,
-     114,   149,   165,   180,   184,   188,   215
+       0,    50,    50,    53,    54,    56,    57,    58,    60,    86,
+     113,   145,   159,   172,   175,   178,   205
 };
 #endif
 
@@ -1338,7 +1338,7 @@ yyreduce:
   switch (yyn)
     {
   case 8:
-#line 61 "practice.y"
+#line 60 "practice.y"
                              {
 				int Find = 0;
                 int j;
@@ -1369,7 +1369,7 @@ yyreduce:
     break;
 
   case 9:
-#line 87 "practice.y"
+#line 86 "practice.y"
                                        {
 				int Find = 0;
                 int j;
@@ -1400,9 +1400,8 @@ yyreduce:
     break;
 
   case 10:
-#line 114 "practice.y"
+#line 113 "practice.y"
                                     {
-				// 先判斷ID有沒有被宣告
 				char typeID[6];
 				int  indexID;
 				int Find = 0;
@@ -1416,7 +1415,7 @@ yyreduce:
 						break;
 					}
                 }
-				// printf("%s.,%s.\n", $<rval.type>3, typeID);
+				
 				if(Find == 0){
                     char error[64]={};
                     strcat(error, "Variable ");
@@ -1426,25 +1425,22 @@ yyreduce:
 					return 1;
 				}			
 				
-				// 判斷等號兩邊型態的正確性
 				else if(strcmp((yyvsp[-1].rval.type), typeID) != 0){
 					yyerror("Type error. Error in line ");
 					return 1;
 				}
-				// 將計算結果放回去(先省略)
 
 				line++;
 			}
-#line 1439 "hw4.tab.c"
+#line 1436 "hw4.tab.c"
     break;
 
   case 11:
-#line 149 "practice.y"
+#line 145 "practice.y"
                                     {
 				// printf("%s.,%s.\n", $<rval.type>1, $<rval.type>3);
 				if(!strcmp((yyvsp[-2].rval.type), "FLOAT") && !strcmp((yyvsp[0].rval.type), "FLOAT")){
 					strcpy((yyval.rval.type), "FLOAT");
-					(yyval.rval.f) = (yyvsp[-2].rval.f) + (yyvsp[0].rval.f);
 				}else if(!strcmp((yyvsp[-2].rval.type), "FLOAT") && !strcmp((yyvsp[0].rval.type), "INT  ")){
 					yyerror("Type error. Error in line ");
 					return 1;
@@ -1453,52 +1449,47 @@ yyreduce:
 					return 1;
 				}else{
 					strcpy((yyval.rval.type), "INT  ");
-					(yyval.rval.i) = (yyvsp[-2].rval.i) + (yyvsp[0].rval.i);
 				}
 			}
-#line 1460 "hw4.tab.c"
+#line 1455 "hw4.tab.c"
     break;
 
   case 12:
-#line 165 "practice.y"
+#line 159 "practice.y"
                                             {
-				if((yyvsp[-2].rval.type) == "FLOAT" && (yyvsp[0].rval.type) == "FLOAT"){
+				if(!strcmp((yyvsp[-2].rval.type), "FLOAT") && !strcmp((yyvsp[0].rval.type), "FLOAT")){
 					strcpy((yyval.rval.type), "FLOAT");
-					(yyval.rval.f) = (yyvsp[-2].rval.f) - (yyvsp[0].rval.f);
-				}else if((yyvsp[-2].rval.type) == "FLOAT" && (yyvsp[0].rval.type) == "INT  "){
+				}else if(!strcmp((yyvsp[-2].rval.type), "FLOAT") && !strcmp((yyvsp[0].rval.type), "INT  ")){
 					yyerror("Type Error. Error in line ");
 					return 1;
-				}else if((yyvsp[-2].rval.type) == "INT  " && (yyvsp[0].rval.type) == "FLOAT"){
+				}else if(!strcmp((yyvsp[-2].rval.type), "INT  ") && !strcmp((yyvsp[0].rval.type), "FLOAT")){
 					yyerror("Type Error. Error in line ");
 					return 1;
 				}else{
 					strcpy((yyval.rval.type), "INT  ");
-					(yyval.rval.i) = (yyvsp[-2].rval.i) - (yyvsp[0].rval.i);
 				}
 			}
-#line 1480 "hw4.tab.c"
+#line 1473 "hw4.tab.c"
     break;
 
   case 13:
-#line 180 "practice.y"
+#line 172 "practice.y"
                                     {
-				strcpy((yyval.rval.type), "INT  ");
-				(yyval.rval.i) = (yyvsp[0].ival);				
+				strcpy((yyval.rval.type), "INT  ");				
+			}
+#line 1481 "hw4.tab.c"
+    break;
+
+  case 14:
+#line 175 "practice.y"
+                                      {
+				strcpy((yyval.rval.type), "FLOAT");
 			}
 #line 1489 "hw4.tab.c"
     break;
 
-  case 14:
-#line 184 "practice.y"
-                                      {
-				strcpy((yyval.rval.type), "FLOAT");
-				(yyval.rval.f) = (yyvsp[0].fval);
-			}
-#line 1498 "hw4.tab.c"
-    break;
-
   case 15:
-#line 188 "practice.y"
+#line 178 "practice.y"
                              {
 				int Find = 0;
                 int j;
@@ -1525,11 +1516,11 @@ yyreduce:
 					return 1;
 				}
 			}
-#line 1529 "hw4.tab.c"
+#line 1520 "hw4.tab.c"
     break;
 
 
-#line 1533 "hw4.tab.c"
+#line 1524 "hw4.tab.c"
 
       default: break;
     }
@@ -1761,7 +1752,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 217 "practice.y"
+#line 207 "practice.y"
 
 
 void yyerror (const char *message)
