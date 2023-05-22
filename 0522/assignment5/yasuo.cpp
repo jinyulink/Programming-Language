@@ -16,10 +16,29 @@ void Yasuo::castSorye_ge_ton(Monster* monster) {
     displayText(this->battle, display);
 } 
 
+void Yasuo::underAttacked(int damage) {
+    if(damage >= this->shield) {
+        damage -= this->shield;
+        this->shield = 0;
+    }
+    else {
+        this->shield -= damage;
+        damage = 0;
+    }
+    this->HP -= damage;
+    if (this->isDead()) {
+        this->HP = 0;
+    }
+}
+
 void Yasuo::action() {
     displayText(this->battle, this->name + " 's turn.");
     pressEntertoContinue();
     
+    if(this->shield != 10) {
+        this->shield = 10;
+    }
+
     string display = this->name + " wants to ....\n\n" + 
         "1. cast \"Sorye ge ton\"\n" + 
         "2. heal\n" + 
