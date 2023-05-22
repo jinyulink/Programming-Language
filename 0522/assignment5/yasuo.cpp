@@ -45,7 +45,7 @@ void Yasuo::action() {
         "3. escape\n" + 
         "(please key in number then Enter)";
     displayText(this->battle, display);
-    int actionNumber = getActionCommand(this->battle, 1, 4);
+    int actionNumber = getActionCommand(this->battle, 1, 3);
 
     switch (actionNumber)
     {

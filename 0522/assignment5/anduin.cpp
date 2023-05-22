@@ -41,7 +41,7 @@ void Anduin::castClarity() {
 }
 
 void Anduin::revive() {
-    string display1 = "Which hero do you want to revive?";
+    string display1 = "Which hero do you want to revive?\n1. kirito\n2. anduin\n3. yasuo";
     displayText(this->battle, display1);
 
     string hero_name;
@@ -81,7 +81,7 @@ void Anduin::action() {
         "5. escape\n" + //Anduin HP 歸零。
         "(please key in number then Enter)";
     displayText(this->battle, display);
-    int actionNumber = getActionCommand(this->battle, 1, 6);
+    int actionNumber = getActionCommand(this->battle, 1, 5);
 
     switch (actionNumber)
     {

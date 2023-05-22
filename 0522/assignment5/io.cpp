@@ -153,18 +153,22 @@ void playEachLineCG(string filePath, int millisecond, int totalLineNumber) {
 
 int getActionCommand(Battle* battle, int lowerBound, int upperBound) {
     int number = 0;
-    // try {
+    try {
         string input = "";
         cin >> input;
         number = stoi(input);
         if (number < lowerBound || number > upperBound) {
             throw out_of_range("stoi: out of range");
         }
-    // } catch (invalid_argument& e) {
-
-    // } catch (out_of_range& e) {
-        
-    // }
+    } 
+    catch (invalid_argument& e) {
+        displayText(battle,"You enter a string not a number. Please enter again.");
+        number = getActionCommand(battle, lowerBound, upperBound);
+    } 
+    catch (out_of_range& e) {
+        displayText(battle,"Number too large or too small. Please enter again.");
+        number = getActionCommand(battle, lowerBound, upperBound);
+    }
 
     return number;
 }
